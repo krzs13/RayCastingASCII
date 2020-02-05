@@ -2,19 +2,23 @@ from vector import Vector
 from game_map import GameMap
 import math 
 
+
+game_map = GameMap()
+
 class Player:
     def __init__(self, position_x, position_y):
         self.position = Vector(position_x, position_y)  # player's position on a map
-        self.direction = Vector(0, 1)  # direction is a vector where player looks
-        self.plane = Vector(0.66, 0)  # plane is a vector of camera plane
-        self.way = Vector(0, 0)  # way is a vector where player moves
+        self.direction = Vector(1, 0)  # direction is a vector where player looks
+        self.plane = Vector(0, 0.66)  # plane is a vector of camera plane
+        self.way = Vector(0, 0)  # way is lenght of player's step
         self.angle = 0  # angle of rotation
 
     def move(self):
-        self.position.x += self.way.x 
-        self.position.y += self.way.y
-        self.way.x = 0
-        self.way.y = 0
+        if game_map.maze[int(self.position.y + self.way.y * self.direction.y)][int(self.position.x + self.way.x * self.direction.x)] != 'X': 
+            self.position.x += self.way.x * self.direction.x 
+            self.position.y += self.way.y * self.direction.y
+            self.way.x = 0
+            self.way.y = 0
 
     def rotate(self):  # from rotation matrix
         x_direction = (self.direction.x * math.cos(self.angle)) - (self.direction.y * math.sin(self.angle))

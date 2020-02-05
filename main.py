@@ -11,7 +11,7 @@ if __name__ == '__main__':
     get_key = GetKey()
     game_map = GameMap()
     screen = Screen()
-    player = Player(13 , 2)
+    player = Player(2 , 2)
     ray = Ray(player.position.x, player.position.y)
     WindowSize()
 
@@ -22,18 +22,16 @@ if __name__ == '__main__':
         key = get_key()
         if key == 27:
             break
-        elif key == 299:  # left arrow - rotation
-            player.angle = 0.1
-        elif key == 301:  # right arrow - rotation
-            player.angle = -0.1
-        elif key == 296:  # up arrow - step
-            if game_map.maze[int(player.position.y + 0.5)][int(player.position.x)] != 'X':
-                player.way.x = 0  # collision detection
-                player.way.y = 0.5
-        elif key == 304:  # down arrow - step
-            if game_map.maze[int(player.position.y - 0.5)][int(player.position.x)] != 'X':
-                player.way.x = 0
-                player.way.y = -0.5
+        elif key == 299:  # left arrow - (rotation)
+            player.angle = -0.2
+        elif key == 301:  # right arrow - (rotation)
+            player.angle = 0.2
+        elif key == 296:  # up arrow - (step)
+            player.way.x = 0.5  # collision detection
+            player.way.y = 0.5
+        elif key == 304:  # down arrow (step)
+            player.way.x = -0.5
+            player.way.y = -0.5
         player.move()
         player.rotate()
 
@@ -85,22 +83,25 @@ if __name__ == '__main__':
             else:
                 wall_distance = (map_y - player.position.y + ((1 - step_y) / 2)) / ray.direction.y
             # ------ height of a wall printed on screen ------
-            wall_height = int(25 / wall_distance)  # 25 is screen's height 
+            if wall_distance == 0:
+                wall_height = 25
+            else:
+                wall_height = int(25 / wall_distance)  # 25 is screen's height 
             wall_start = int((-wall_height / 2) + (25 / 2))
             if wall_start < 0:
                 wall_start = 0
             wall_end = int((wall_height / 2) + (25 / 2))
             if wall_end >= 25:
-                wall_end = 24
-            if wall_distance < 8:
+                wall_end = 25
+            if wall_distance < 3:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u2593'
-            elif 8 <= wall_distance < 16:
+                    screen.screen[y][x] = u'\u2593'
+            elif 3 <= wall_distance < 6:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u2592'
+                    screen.screen[y][x] = u'\u2592'
             else:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u2591'  
+                    screen.screen[y][x] = u'\u2591'  
         screen.printer()       
         Wait()
 

@@ -16,13 +16,21 @@ class Screen:
             if y <= 12:
                 for x in range(self.width):
                     base[y].append(' ')
-            else:
+            elif 13 <= y < 17:
                 for x in range(self.width):
                     base[y].append('.')
+            elif 17 <= y < 21:
+                for x in range(self.width):
+                    base[y].append(':')
+            else:
+                for x in range(self.width):
+                    base[y].append(';')
+
 
     def cleaner(self):
         for y in range(self.height):
-            self.screen[y] = self.clean_screen[y]
+            for x in range(self.width):
+                self.screen[y][x] = self.clean_screen[y][x]
 
     def printer(self):
         buffer = ''
