@@ -23,11 +23,11 @@ if __name__ == '__main__':
         if key == 27:
             break
         elif key == 299:  # left arrow
-            player.way.x = 0.5
-            player.way.y = 0
+            player.angle = -5
+            #player.way.y = 0
         elif key == 301:  # right arrow
-            player.way.x = -0.5
-            player.way.y = 0
+            player.angle = 5
+            #player.way.y = 0
         elif key == 296:  # up arrow
             player.way.x = 0
             player.way.y = 0.5
@@ -35,24 +35,18 @@ if __name__ == '__main__':
             player.way.x = 0
             player.way.y = -0.5
         player.move()
+        player.rotate()
+
         # ====== RAY CASTING ======
-
         # ------ rays creation ------
-        for x in range(1, 101):  # as many rays as characters in screen width
-
+        for x in range(0, 100):  # as many rays as characters in screen width
             map_x = int(player.position.x)  # box of the map where player is
             map_y = int(player.position.y)
-            camera = (2 * (x / 100)) - 1  # left side of a screen is -1, center 0, right 1
+            camera = (2 * (x / 99)) - 1  # left side of a screen is -1, center 0, right 1
             ray.direction.x = player.direction.x + (player.plane.x * camera)
-            if ray.direction.x == 0:
-                ray.direction.x = 0.000000000000000000001
             ray.direction.y = player.direction.y + (player.plane.y * camera)
-            if ray.direction.y == 0:
-                ray.direction.y = 0.000000000000000000001
             distance_x = 0  # length of ray from player's position to next x or y side of a box 
             distance_y = 0
-            """delta_distance_x = math.sqrt(1 + (ray.direction.y * ray.direction.y) / (ray.direction.x * ray.direction.x))
-            delta_distance_y = math.sqrt(1 + (ray.direction.x * ray.direction.x) / (ray.direction.y * ray.direction.y))"""
             delta_distance_x = abs(1 / ray.direction.x)  # length of ray from one x or y side to next
             delta_distance_y = abs(1 / ray.direction.y)
             step_x = 0  # direction of ray's step on map's boxes (+1 or -1)
@@ -72,7 +66,7 @@ if __name__ == '__main__':
             else:
                 step_y = 1
                 distance_y = (map_y + 1 - player.position.y) * delta_distance_y
-            # ------ rays further way on a map ------
+            # ------ ray's further way on a map ------
             while wall_hit == 0:  # alghoritm that moves rays through map's boxes until it hits a wall 
                 if distance_x < distance_y:  # choose x or y direction to move ray through map's boxes
                     distance_x += delta_distance_x
@@ -98,11 +92,15 @@ if __name__ == '__main__':
             wall_end = int((wall_height / 2) + (25 / 2))
             if wall_end >= 25:
                 wall_end = 24
-            for y in range(wall_start, wall_end):
-                screen.screen[y][x - 1] = '#'
-
-
-
+            if wall_distance < 8:
+                for y in range(wall_start, wall_end):
+                    screen.screen[y][x - 1] = u'\u04c1'
+            elif 8 <= wall_distance < 16:
+                for y in range(wall_start, wall_end):
+                    screen.screen[y][x - 1] = u'\u04fe'
+            else:
+                for y in range(wall_start, wall_end):
+                    screen.screen[y][x - 1] = u'\u0425'  
         screen.printer()       
         Wait()
 

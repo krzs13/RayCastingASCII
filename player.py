@@ -17,17 +17,15 @@ class Player:
         self.way.y = 0
 
     def rotate(self):  # from rotation matrix
-        # ------ counter clockwise ------
-        if angle > 0:
-            x_direction = (self.direction.x * math.cos(self.angle)) - (self.direction.y * math.sin(self.angle))
-            y_direction = (self.direction.x * math.sin(self.angle)) + (self.direction.y * math.cos(self.angle))
-            self.direction.x = x_direction
-            self.direction.y = y_direction
-            x_plane = (self.plane.x * math.cos(self.angle)) - (self.plane.y  * math.sin(self.angle))
-            y_plane = (self.plane.x * math.sin(self.angle)) + (self.plane.y  * math.cos(self.angle))
-            self.plane.x = x_plane
-            self.plane.y = y_plane
-            self.angle = 0
-    
+        x_direction = (self.direction.x * math.cos(self.angle)) - (self.direction.y * math.sin(self.angle))
+        y_direction = (self.direction.x * math.sin(self.angle)) + (self.direction.y * math.cos(self.angle))
+        self.direction.x = x_direction
+        self.direction.y = y_direction
+        x_plane = (self.plane.x * math.cos(self.angle)) - (self.plane.y  * math.sin(self.angle))
+        y_plane = (self.plane.x * math.sin(self.angle)) + (self.plane.y  * math.cos(self.angle))
+        self.plane.x = x_plane
+        self.plane.y = y_plane
+        self.angle = 0
+        
 
         
