@@ -26,7 +26,6 @@ class Screen:
                 for x in range(self.width):
                     base[y].append(';')
 
-
     def cleaner(self):
         for y in range(self.height):
             for x in range(self.width):

@@ -2,5 +2,4 @@ class Vector:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.vector = [x, y]
         

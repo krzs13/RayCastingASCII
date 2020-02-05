@@ -32,9 +32,8 @@ if __name__ == '__main__':
         elif key == 304:  # down arrow (step)
             player.way.x = -0.25
             player.way.y = -0.25
-        player.move()
         player.rotate()
-
+        player.move()
         # ====== RAY CASTING ======
         # ------ rays creation ------
         for x in range(0, 100):  # as many rays as characters in screen width
