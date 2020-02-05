@@ -22,16 +22,14 @@ if __name__ == '__main__':
         key = get_key()
         if key == 27:
             break
-        elif key == 299:  # left arrow
-            player.angle = -5
-            #player.way.y = 0
-        elif key == 301:  # right arrow
-            player.angle = 5
-            #player.way.y = 0
-        elif key == 296:  # up arrow
+        elif key == 299:  # left arrow - rotation
+            player.angle = 0.1
+        elif key == 301:  # right arrow - rotation
+            player.angle = -0.1
+        elif key == 296:  # up arrow - step
             player.way.x = 0
             player.way.y = 0.5
-        elif key == 304:  # down arrow
+        elif key == 304:  # down arrow - step
             player.way.x = 0
             player.way.y = -0.5
         player.move()
@@ -94,13 +92,13 @@ if __name__ == '__main__':
                 wall_end = 24
             if wall_distance < 8:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u04c1'
+                    screen.screen[y][x - 1] = u'\u2593'
             elif 8 <= wall_distance < 16:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u04fe'
+                    screen.screen[y][x - 1] = u'\u2592'
             else:
                 for y in range(wall_start, wall_end):
-                    screen.screen[y][x - 1] = u'\u0425'  
+                    screen.screen[y][x - 1] = u'\u2591'  
         screen.printer()       
         Wait()
 
