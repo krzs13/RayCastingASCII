@@ -27,11 +27,13 @@ if __name__ == '__main__':
         elif key == 301:  # right arrow - rotation
             player.angle = -0.1
         elif key == 296:  # up arrow - step
-            player.way.x = 0
-            player.way.y = 0.5
+            if game_map.maze[int(player.position.y + 0.5)][int(player.position.x)] != 'X':
+                player.way.x = 0  # collision detection
+                player.way.y = 0.5
         elif key == 304:  # down arrow - step
-            player.way.x = 0
-            player.way.y = -0.5
+            if game_map.maze[int(player.position.y - 0.5)][int(player.position.x)] != 'X':
+                player.way.x = 0
+                player.way.y = -0.5
         player.move()
         player.rotate()
 
