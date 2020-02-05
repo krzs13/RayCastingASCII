@@ -27,11 +27,11 @@ if __name__ == '__main__':
         elif key == 301:  # right arrow - (rotation)
             player.angle = 0.2
         elif key == 296:  # up arrow - (step)
-            player.way.x = 0.5  # collision detection
-            player.way.y = 0.5
+            player.way.x = 0.25  # collision detection
+            player.way.y = 0.25
         elif key == 304:  # down arrow (step)
-            player.way.x = -0.5
-            player.way.y = -0.5
+            player.way.x = -0.25
+            player.way.y = -0.25
         player.move()
         player.rotate()
 

@@ -2,7 +2,7 @@ from multiprocessing.dummy import Process, Value
 import os
 import getch
 import time
-Wait = lambda:time.sleep(0.3)
+Wait = lambda:time.sleep(0.15)
 ClearConsole = lambda: os.system('cls')
 WindowSize = lambda: os.system('mode 100, 26')
 class GetKey:
