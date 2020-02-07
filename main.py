@@ -27,11 +27,9 @@ if __name__ == '__main__':
         elif key == 301:  # right arrow - (rotation)
             player.angle = 0.2
         elif key == 296:  # up arrow - (step)
-            player.way.x = 0.25  # collision detection
-            player.way.y = 0.25
+            player.way = 0.25
         elif key == 304:  # down arrow (step)
-            player.way.x = -0.25
-            player.way.y = -0.25
+            player.way = -0.25
         player.rotate()
         player.move()
         # ====== RAY CASTING ======
@@ -48,7 +46,7 @@ if __name__ == '__main__':
             delta_distance_y = abs(1 / ray.direction.y)
             step_x = 0  # direction of ray's step on map's boxes (+1 or -1)
             step_y = 0
-            wall_hit = 0
+            wall_hit = False
             site = 0
             # ------ first step of ray on a map ------
             if ray.direction.x < 0:  # calculate ray's step on map's boxes and distance_x or y
@@ -64,7 +62,7 @@ if __name__ == '__main__':
                 step_y = 1
                 distance_y = (map_y + 1 - player.position.y) * delta_distance_y
             # ------ ray's further way on a map ------
-            while wall_hit == 0:  # alghoritm that moves rays through map's boxes until it hits a wall 
+            while not wall_hit:  # alghoritm that moves rays through map's boxes until it hits a wall 
                 if distance_x < distance_y:  # choose x or y direction to move ray through map's boxes
                     distance_x += delta_distance_x
                     map_x += step_x
@@ -74,7 +72,7 @@ if __name__ == '__main__':
                     map_y += step_y
                     side = 1
                 if game_map.maze[map_y][map_x] == 'X':
-                    wall_hit = 1
+                    wall_hit = True
             # ------ distance between player and wall ------
             wall_distance = 0
             if side == 0:
@@ -92,7 +90,7 @@ if __name__ == '__main__':
             wall_end = int((wall_height / 2) + (25 / 2))
             if wall_end >= 25:
                 wall_end = 25
-            if wall_distance < 3:
+            if wall_distance < 3:  # darker wall characters for greater distance
                 for y in range(wall_start, wall_end):
                     screen.screen[y][x] = u'\u2593'
             elif 3 <= wall_distance < 6:
