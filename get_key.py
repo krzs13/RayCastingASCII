@@ -3,7 +3,7 @@ import os
 import getch
 import time
 Wait = lambda:time.sleep(0.15)
-ClearConsole = lambda: os.system('cls')
+ClearConsole = lambda: os.system('cls') if os.name == 'nt' else os.system('clear')
 WindowSize = lambda: os.system('mode 100, 26')
 class GetKey:
     key = Value('d', 0)

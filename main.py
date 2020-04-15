@@ -1,10 +1,11 @@
-from get_key import GetKey, Wait, ClearConsole, WindowSize
+import math
+
 from game_map import GameMap
-from screen import Screen
+from get_key import ClearConsole, GetKey, Wait, WindowSize
 from player import Player
 from ray import Ray
+from screen import Screen
 from vector import Vector
-import math
 
 
 if __name__ == '__main__':
@@ -101,5 +102,3 @@ if __name__ == '__main__':
                     screen.screen[y][x] = u'\u2591'  
         screen.printer()       
         Wait()
-
-    
